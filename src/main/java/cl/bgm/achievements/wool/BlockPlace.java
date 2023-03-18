@@ -27,6 +27,6 @@ public class BlockPlace extends BlockListener {
       p.playEffect(p.getLocation(), Effect.CLICK1, 5);
     }
 
-    Bukkit.broadcastMessage(WoolMonument.getCompletionMessage(e.getPlayer(), block));
+    Bukkit.broadcastMessage(WoolMonument.getWoolPlacedMsg(e.getPlayer(), block));
   }
 }

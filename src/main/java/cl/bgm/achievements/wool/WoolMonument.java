@@ -83,7 +83,7 @@ public class WoolMonument {
     return false;
   }
 
-  public static String getCompletionMessage(Player player, Block block) {
+  public static String getWoolPlacedMsg(Player player, Block block) {
     return String.format(
         WOOL_PLACED_MSG,
         player.getDisplayName(),
