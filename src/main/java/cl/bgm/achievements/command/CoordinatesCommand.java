@@ -15,10 +15,10 @@ public class CoordinatesCommand implements CommandExecutor {
 
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-    if (!command.getName().equalsIgnoreCase(NAME)) return false;
+    if (!command.getName().equalsIgnoreCase(NAME)) return true;
     if (!(sender instanceof Player)) {
       sender.sendMessage("You must be a player to execute this command.");
-      return false;
+      return true;
     }
 
     Player player = (Player) sender;
