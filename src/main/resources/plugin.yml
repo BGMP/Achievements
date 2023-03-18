@@ -1,0 +1,5 @@
+name: Achievements
+version: '${project.version}'
+main: cl.bgm.achievements.Achievements
+authors: [ BGMP ]
+description: Custom achievements plugin
