@@ -3,3 +3,8 @@ version: '${project.version}'
 main: cl.bgm.achievements.Achievements
 authors: [ BGMP ]
 description: Custom achievements plugin
+commands:
+  coordinates:
+    usage: /coordinates
+    description: Broadcasts your current coordinates.
+    aliases: [coord, coords]

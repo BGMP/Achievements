@@ -1,5 +1,6 @@
 package cl.bgm.achievements;
 
+import cl.bgm.achievements.command.CoordinatesCommand;
 import cl.bgm.achievements.wool.WoolMonument;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
@@ -27,12 +28,19 @@ public final class Achievements extends JavaPlugin {
     // Init WoolMonument
     WoolMonument monument = new WoolMonument();
 
+    // Register Commands
+    this.registerCommands();
+
     Bukkit.getLogger().info(String.format("%s enabled.", getDesc().getFullName()));
   }
 
   @Override
   public void onDisable() {
     // Plugin shutdown logic
+  }
+
+  public void registerCommands() {
+    this.getCommand(CoordinatesCommand.NAME).setExecutor(new CoordinatesCommand());
   }
 
   public void registerEvent(Event.Type type, Listener listener, Event.Priority priority) {
