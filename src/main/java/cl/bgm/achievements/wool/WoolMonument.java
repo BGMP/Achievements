@@ -92,7 +92,7 @@ public class WoolMonument {
   }
 
   private static String getPrettyWoolName(DyeColor color) {
-    String[] name = colorMap.get(color).name().toLowerCase().split("_"); // get name parts
+    String[] name = color.name().toLowerCase().split("_"); // get name parts
     String cap = name[0].substring(0, 1).toUpperCase() + name[0].substring(1); // capitalise
     if (name.length > 1) {
       cap =
