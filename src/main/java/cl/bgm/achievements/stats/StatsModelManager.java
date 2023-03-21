@@ -93,9 +93,9 @@ public class StatsModelManager extends TimerTask {
               results.getInt(PlayerStats.BLOCKS_PLACED_COL)));
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      this.connector.disconnect();
     }
-
-    this.connector.disconnect();
   }
 
   private void registerPlayer(Player player) {
@@ -116,9 +116,9 @@ public class StatsModelManager extends TimerTask {
       this.playerStats.add(new PlayerStats(player.getUniqueId(), player.getName(), 0, 0));
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      this.connector.disconnect();
     }
-
-    this.connector.disconnect();
   }
 
   private void createSQLTable() {
@@ -157,9 +157,9 @@ public class StatsModelManager extends TimerTask {
       statement.executeUpdate();
     } catch (SQLException exception) {
       exception.printStackTrace();
+    } finally {
+      this.connector.disconnect();
     }
-
-    this.connector.disconnect();
   }
 
   @Override
