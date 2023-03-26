@@ -1,5 +1,6 @@
 package cl.bgm.achievements.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -24,12 +25,12 @@ public class CoordinatesCommand implements CommandExecutor {
     Player player = (Player) sender;
     Location location = player.getLocation();
 
-    player.sendMessage(player.getDisplayName() + ":");
-    player.sendMessage(
+    Bukkit.broadcastMessage(player.getDisplayName() + ":");
+    Bukkit.broadcastMessage(
         ChatColor.YELLOW + "X" + ChatColor.WHITE + ": " + ChatColor.GRAY + location.getBlockX());
-    player.sendMessage(
+    Bukkit.broadcastMessage(
         ChatColor.YELLOW + "Y" + ChatColor.WHITE + ": " + ChatColor.GRAY + location.getBlockY());
-    player.sendMessage(
+    Bukkit.broadcastMessage(
         ChatColor.YELLOW + "Z" + ChatColor.WHITE + ": " + ChatColor.GRAY + location.getBlockZ());
 
     return true;
