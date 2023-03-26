@@ -134,9 +134,9 @@ public class StatsModelManager extends TimerTask {
     } catch (SQLException e) {
       Bukkit.getLogger().severe("Error initialising PlayerStats's table: " + PlayerStats.TABLE);
       e.printStackTrace();
+    } finally {
+      this.connector.disconnect();
     }
-
-    this.connector.disconnect();
   }
 
   private void deployPlayerStats(PlayerStats playerStats) {
