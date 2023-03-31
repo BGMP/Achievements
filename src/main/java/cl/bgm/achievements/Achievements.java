@@ -29,6 +29,7 @@ public final class Achievements extends JavaPlugin {
   @Override
   public void onEnable() {
     achievements = this;
+
     // Init Timer
     this.timer = new Timer();
 
@@ -51,6 +52,10 @@ public final class Achievements extends JavaPlugin {
     this.connector.disconnect();
   }
 
+  public void registerEvent(Event.Type type, Listener listener, Event.Priority priority) {
+    Bukkit.getServer().getPluginManager().registerEvent(type, listener, priority, this);
+  }
+
   private void createDataFolder() {
     if (getDataFolder().exists()) return;
     if (getDataFolder().mkdir()) return;
@@ -63,9 +68,5 @@ public final class Achievements extends JavaPlugin {
   private void registerCommands() {
     this.getCommand(CoordinatesCommand.NAME).setExecutor(new CoordinatesCommand());
     this.getCommand(StatisticsCommand.NAME).setExecutor(new StatisticsCommand(this.statsManager));
-  }
-
-  public void registerEvent(Event.Type type, Listener listener, Event.Priority priority) {
-    Bukkit.getServer().getPluginManager().registerEvent(type, listener, priority, this);
   }
 }
