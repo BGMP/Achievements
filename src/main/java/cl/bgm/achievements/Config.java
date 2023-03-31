@@ -1,3 +1,6 @@
 package cl.bgm.achievements;
 
-public interface Config {}
+public interface Config {
+
+  String getDiscordWebhookURL();
+}
