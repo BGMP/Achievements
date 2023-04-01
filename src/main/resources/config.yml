@@ -1,3 +1,12 @@
 #
 # Discord Integration
 discord-webhook-url: ""
+
+#
+# Wool Monument
+wool-monument:
+  orientation: NORTH
+  origin:
+    x: 0.0
+    y: 70.0
+    z: 0.0

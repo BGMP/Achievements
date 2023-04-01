@@ -53,7 +53,7 @@ public final class Achievements extends JavaPlugin implements DiscordConstants {
     this.connector = new SQLiteConnector(new File(getDataFolder() + "/" + SQLITE_FILE).getPath());
 
     // Init Objective Managers
-    this.woolMonument = new WoolMonument();
+    this.woolMonument = new WoolMonument(this.config);
     this.statsManager = new StatsModelManager(this.connector, this.timer);
     this.discordManager = new DiscordManager(this.config);
 
