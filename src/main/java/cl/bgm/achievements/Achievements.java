@@ -3,7 +3,6 @@ package cl.bgm.achievements;
 import cl.bgm.achievements.command.CoordinatesCommand;
 import cl.bgm.achievements.command.StatisticsCommand;
 import cl.bgm.achievements.db.SQLiteConnector;
-import cl.bgm.achievements.discord.DiscordConstants;
 import cl.bgm.achievements.discord.DiscordManager;
 import cl.bgm.achievements.stats.StatsModelManager;
 import cl.bgm.achievements.wool.WoolMonument;
@@ -20,7 +19,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Achievements extends JavaPlugin implements DiscordConstants {
+public final class Achievements extends JavaPlugin {
   private static final String SQLITE_FILE = "db.db";
   private static final String CONFIG_FILE = "config.yml";
 
@@ -117,7 +116,7 @@ public final class Achievements extends JavaPlugin implements DiscordConstants {
         try {
           output = new FileOutputStream(actual);
           byte[] buf = new byte[8192];
-          int length = 0;
+          int length;
           while ((length = input.read(buf)) > 0) {
             output.write(buf, 0, length);
           }
@@ -128,7 +127,7 @@ public final class Achievements extends JavaPlugin implements DiscordConstants {
           e.printStackTrace();
         } finally {
           try {
-            if (input != null) input.close();
+            input.close();
           } catch (IOException ignored) {
           }
 
