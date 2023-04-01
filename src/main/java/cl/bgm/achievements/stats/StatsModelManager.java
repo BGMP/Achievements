@@ -3,6 +3,8 @@ package cl.bgm.achievements.stats;
 import cl.bgm.achievements.Achievements;
 import cl.bgm.achievements.db.SQLiteConnector;
 import cl.bgm.achievements.db.model.PlayerStats;
+import cl.bgm.achievements.discord.DiscordConstants;
+import cl.bgm.achievements.discord.DiscordManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,23 +17,31 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-public class StatsModelManager extends TimerTask {
+public class StatsModelManager extends TimerTask implements DiscordConstants {
   private SQLiteConnector connector;
+  private DiscordManager discordManager;
   private Timer timer;
 
   private Set<PlayerStats> playerStats = new HashSet<>();
 
-  public StatsModelManager(SQLiteConnector connector, Timer timer) {
+  public StatsModelManager(SQLiteConnector connector, DiscordManager discordManager, Timer timer) {
     this.connector = connector;
+    this.discordManager = discordManager;
     this.timer = timer;
 
     // Create associated table if absent
     this.createSQLTable();
 
     Achievements.get()
-        .registerEvent(Event.Type.BLOCK_PLACE, new BlockPlace(this), Event.Priority.Monitor);
+        .registerEvent(
+            Event.Type.BLOCK_PLACE,
+            new BlockPlace(this, this.discordManager),
+            Event.Priority.Monitor);
     Achievements.get()
-        .registerEvent(Event.Type.BLOCK_BREAK, new BlockBreak(this), Event.Priority.Monitor);
+        .registerEvent(
+            Event.Type.BLOCK_BREAK,
+            new BlockBreak(this, this.discordManager),
+            Event.Priority.Monitor);
     Achievements.get()
         .registerEvent(Event.Type.PLAYER_JOIN, new PlayerJoin(this), Event.Priority.Monitor);
     Achievements.get()
@@ -52,14 +62,20 @@ public class StatsModelManager extends TimerTask {
     this.playerStats.remove(playerStats);
   }
 
-  public void addMinedBlock(Player player) {
+  public PlayerStats addMinedBlock(Player player) {
     PlayerStats stats = this.getPlayerStats(player);
-    if (stats != null) stats.addBlockMined();
+    if (stats == null) return null;
+
+    stats.addBlockMined();
+    return stats;
   }
 
-  public void addPlacedBlock(Player player) {
+  public PlayerStats addPlacedBlock(Player player) {
     PlayerStats stats = this.getPlayerStats(player);
-    if (stats != null) stats.addBlockPlaced();
+    if (stats == null) return null;
+
+    stats.addBlockPlaced();
+    return stats;
   }
 
   public PlayerStats getPlayerStats(Player player) {

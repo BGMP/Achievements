@@ -53,8 +53,8 @@ public final class Achievements extends JavaPlugin {
 
     // Init Objective Managers
     this.woolMonument = new WoolMonument(this.config);
-    this.statsManager = new StatsModelManager(this.connector, this.timer);
     this.discordManager = new DiscordManager(this.config);
+    this.statsManager = new StatsModelManager(this.connector, this.discordManager, this.timer);
 
     // Register Commands
     this.registerCommands();
