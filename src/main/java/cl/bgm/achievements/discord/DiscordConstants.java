@@ -1,7 +1,6 @@
 package cl.bgm.achievements.discord;
 
 import cl.bgm.achievements.stats.Milestone;
-
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
